@@ -5,17 +5,14 @@ from listings.models import Band
 
 def hello(request) :
     bands = Band.objects.all()
-    return HttpResponse(f"""<h1>My web page <h1/>
-                        <p>Ma liste de preféres</p>
-                        <ul>
-                            <li>{bands[0].name}</li>
-                            <li>{bands[1].name}</li>
-                            <li>{bands[2].name}</li>
-                        </ul>
-                        """)
+    return render(request,"listings/hello.html",{"bands":bands})
 
 def about(request) :
-    return HttpResponse("<h1>À propos</h1> <p>Nous adorons merch !</p>")
+    return render(request=request,template_name="listings/about/index.html")
+
+def contact(request) :
+    return render(request=request,template_name="listings/contact/index.html")
 
 def listing(request) :
-    return HttpResponse("la page de lising")
+    bands = Band.objects.all()
+    return render(request=request,template_name="listings/hello.html",context={"bands":bands})
